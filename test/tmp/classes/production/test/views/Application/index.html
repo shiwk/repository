@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+
+<form action="@{Application.login()}" method="GET">
+    <input type="text" name="userid" />
+    <input type="password" name="password" />
+    <input type="submit" value="login!" />
+</form>
+

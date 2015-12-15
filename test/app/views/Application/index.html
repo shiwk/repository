@@ -1,0 +1,15 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<script type="text/javascript" src="@{'public/js/jquery-1.8.1.min.js'}"></script>
+<script type="text/javascript">
+    #{if error!=null}
+    alert("${error}")
+    #{/if}
+</script>
+<form action="@{Application.login()}" method="GET">
+    <input type="text" name="userid" />
+    <input type="password" name="password" />
+    <input type="submit" value="login!" />
+</form>
+
