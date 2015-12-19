@@ -1,5 +1,6 @@
 package models;
 
+import play.data.binding.As;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -20,9 +21,9 @@ public class Excuse extends Model {
     public int excuseType;
     public int state;
 
-    public Date replyTimeDM;
-    public Date replyTimeM;
-    public Date replyTimeVM;
+    @As("dd/MM/yyyy HH:MM£»ss")public Date replyTimeDM;
+    @As("dd/MM/yyyy HH:MM£»ss")public Date replyTimeM;
+    @As("dd/MM/yyyy HH:MM£»ss")public Date replyTimeVM;
 
     @Lob
     public String reason;

@@ -63,10 +63,24 @@ public class Application extends    Controller {
         List<Excuse> excuses=Excuse.find("byUserid",staff.userId).fetch();
         renderJSON(excuses);
     }
+    //查看未通过的请假条
     public static  void checkExcuseNoPass(Long id){
         Staff staff=Staff.findById(id);
         List<Excuse> excuses=Excuse.find("byUseridAndState",staff.userId,0).fetch();
         renderJSON(excuses);
+    }
+    //查看同部门的所有人的请假条
+    public static void checkExcuseInDepartment(Long id){
+        Staff staff=Staff.findById(id);
+        List<Excuse> excuses=Excuse.find( "select e from Excuse e, Staff s " +
+                "where s.userId = e.userId and s.department= ?",staff.department).fetch();
+        renderJSON(excuses);
+    }
+    //查看同部门员工列表
+    public static void  staffInDepartment(Long id){
+        Staff staff=Staff.findById(id);
+        List<Staff> staffs=Staff.find("byDepartment",staff.department).fetch();
+        renderJSON(staffs);
     }
 //    public static void modifyInfo(long id, @Required String userid, @Required String name){
 //        Staff staff=Staff.findById(id);
@@ -84,6 +98,12 @@ public class Application extends    Controller {
         else{
 
         }
+    }
+    //查询个人历史请假条
+    public static void checkExcusebyPerson(Long id){
+        Staff staff=Staff.findById(id);
+        List<Excuse> excuses=Excuse.find("byUserid",staff.userId).fetch();
+        renderJSON(excuses);
     }
 
 }

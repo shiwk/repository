@@ -11,6 +11,29 @@ GET     /                                       Application.index
 *     /addStaff                                 Application.addStaff
 *     /checkExcuse                              Application.checkExcuse
 *     /checkExcuseNoPass                        Application.checkExcuseNoPass
+*     /checkExcuseInDepartment                  Application.checkExcuseInDepartment
+*     /ExcusebyPerson                           Application.checkExcusebyPerson
+*     /staffDepartment                          Application.staffInDepartment
+
+*     /approvalDM                               Department.approval
+*     /rejectDM                                 Department.reject
+*     /ExcuseToPassbyDM                         Department.checkExcuseToPass
+*     /ExcusePassedbyDM                         Department.checkExcusePassed
+*     /ExcusebyDatebyDM                         Department.checkExcusebyDate
+
+*     /ExcuseToPassbyVM                         ViceManager.checkExcuseToPass
+*     /approvalVM                               ViceManager.approval
+*     /rejectVM                                 ViceManager.reject
+*     /ExcusePassedbyVM                         ViceManager.checkExcusePassed
+
+*     /ExcuseToPassbyM                          Manager.checkExcuseToPass
+*     /approvalM                                Manager.approval
+*     /rejectM                                  Manager.reject
+*     /ExcusePassedbyM                          Manager.checkExcusePassed
+
+
+
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
