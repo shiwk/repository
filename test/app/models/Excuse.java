@@ -1,6 +1,7 @@
 package models;
 
 import play.data.binding.As;
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -43,5 +44,14 @@ public class Excuse extends Model {
         this.startDate=startDate;
         this.state=state;
         this.days=days;
+    }
+    public Excuse modify(@Required int days,@Required @As("dd/MM/yyyy")Date startDate,@Required @As("dd/MM/yyyy") Date endDate, @Required String reason,@Required int excuseType){
+        this.days=days;
+        this.startDate=startDate;
+        this.endDate=endDate;
+        this.reason=reason;
+        this.excuseType=excuseType;
+        this.save();
+        return this;
     }
 }

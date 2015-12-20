@@ -40,16 +40,12 @@ public class Application extends    Controller {
          else
              return false;
     }
+    //查看个人信息
     public static void checkInfo(Long id){
         Staff staff=Staff.findById(id);
         renderJSON(staff);
     }
-    //添加员工
-    public static void addStaff(String userId, String password, String name, int degree, int isMarried, int sex, @As("dd/MM/yyyy")Date birthDate, @As("dd/MM/yyyy")Date entryDate, int remainDays ,int department){
-        Staff staff=new Staff(userId,password,name,degree,isMarried,sex,birthDate,entryDate,remainDays,department);
-        staff.save();
-        renderJSON(staff);
-    }
+
     //写请假条
     public static void writeLips(long id,@Required int days,@Required @As("dd/MM/yyyy")Date startDate,@Required @As("dd/MM/yyyy") Date endDate, @Required String reason,@Required int excuseType){
         Staff staff=Staff.findById(id);
@@ -68,6 +64,16 @@ public class Application extends    Controller {
         Staff staff=Staff.findById(id);
         List<Excuse> excuses=Excuse.find("byUseridAndState",staff.userId,0).fetch();
         renderJSON(excuses);
+    }
+    //修改假条
+    public static void modifyExcuse(Long id,@Required int days,@Required @As("dd/MM/yyyy")Date startDate,@Required @As("dd/MM/yyyy") Date endDate, @Required String reason,@Required int excuseType){
+        Excuse excuse=Excuse.findById(id);
+        renderJSON(excuse.modify(days, startDate, endDate, reason, excuseType));
+    }
+    //删除请假条
+    public static void deleteExcuse(Long id){
+        Excuse excuse=Excuse.findById(id);
+        excuse.delete();
     }
     //查看同部门的所有人的请假条
     public static void checkExcuseInDepartment(Long id){
@@ -102,8 +108,7 @@ public class Application extends    Controller {
     //查询个人历史请假条
     public static void checkExcusebyPerson(Long id){
         Staff staff=Staff.findById(id);
-        List<Excuse> excuses=Excuse.find("byUserid",staff.userId).fetch();
+        List<Excuse> excuses=Excuse.find("select e from Excuse e where e.userId=? order by e.startDate",staff.userId).fetch();
         renderJSON(excuses);
     }
-
 }

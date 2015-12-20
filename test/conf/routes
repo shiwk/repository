@@ -8,12 +8,14 @@ GET     /                                       Application.index
 *     /setpwd                                   Application.modifyPassword(format:'xml')
 *     /checkInfo                                Application.checkInfo
 *     /writeLips                                Application.writeLips
-*     /addStaff                                 Application.addStaff
 *     /checkExcuse                              Application.checkExcuse
 *     /checkExcuseNoPass                        Application.checkExcuseNoPass
 *     /checkExcuseInDepartment                  Application.checkExcuseInDepartment
 *     /ExcusebyPerson                           Application.checkExcusebyPerson
 *     /staffDepartment                          Application.staffInDepartment
+*     /modifyExcuse                             Application.modifyExcuse
+*     /deleteExcuse                             Application.deleteExcuse
+
 
 *     /approvalDM                               Department.approval
 *     /rejectDM                                 Department.reject
@@ -25,14 +27,18 @@ GET     /                                       Application.index
 *     /approvalVM                               ViceManager.approval
 *     /rejectVM                                 ViceManager.reject
 *     /ExcusePassedbyVM                         ViceManager.checkExcusePassed
+*     /ExcusebyDepartment                       ViceManager.checkExcusebyDepartment
 
 *     /ExcuseToPassbyM                          Manager.checkExcuseToPass
 *     /approvalM                                Manager.approval
 *     /rejectM                                  Manager.reject
 *     /ExcusePassedbyM                          Manager.checkExcusePassed
 
-
-
+*     /addStaff                                 Admin.addStaff
+*     /removeStaff                              Admin.deleteStaff
+*     /modifyStaff                              Admin.modifyStaff
+*     /checkStaffbyDepartment                   Admin.checkStaffbyDepartment
+*     /checkStaffbyEntryDate                    Admin.checkStaffbyEntryDate
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

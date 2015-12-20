@@ -45,6 +45,12 @@ public class ViceManager extends Controller{
         List<Excuse> excuses=Excuse.find("select e from Excuse e where e.state=2 or e.state=3 or e.state=-2.").fetch();
         renderJSON(excuses);
     }
+    //按照部门查询假条
+    public static void checkExcusebyDepartment(int department){
+        List<Excuse> excuses=Excuse.find( "select e from Excuse e, Staff s " +
+                "where s.userId = e.userId and s.department= ? and e.state=0",department).fetch();
+        renderJSON(excuses);
+    }
 
 
 

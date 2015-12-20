@@ -40,9 +40,15 @@ public class Staff extends Model {
         this.sex=sex;
         this.department=department;
     }
-    public Staff modify( String userid,  String name){
-        this.userId=userid;
+    public Staff modify( String name, int degree, int isMarried, int sex, Date birthDate, Date entryDate, int remainDays ,int department){
         this.name=name;
+        this.degree=degree;
+        this.isMarried=isMarried;
+        this.sex=sex;
+        this.birthDate=birthDate;
+        this.entryDate=entryDate;
+        this.remainDays=remainDays;
+        this.department=department;
         this.save();
         return this;
     }
@@ -50,6 +56,10 @@ public class Staff extends Model {
         this.password=password;
         this.save();
         return this;
+    }
+    public void remove(){
+        this.department+=100;
+        this.save();
     }
 
 }
