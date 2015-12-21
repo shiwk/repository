@@ -1,0 +1,29 @@
+{
+  "userId": "021",
+  "password": "sdf",
+  "name": "swk",
+  "degree": 1,
+  "remainDays": 21,
+  "isMarried": 1,
+  "sex": 1,
+  "birthDate": "1993/02/07 00:00:00",
+  "entryDate": "2011/09/01 00:00:00",
+  "department": 1,
+  "id": 16
+}
+  {
+    "userId": "022",
+    "days": 2,
+    "startDate": "2015/12/18 00:00:00",
+    "endDate": "2015/12/19 00:00:00",
+    "excuseType": 1,
+    "state": 0,
+    "replyTimeDM": "2015/12/21 09:49:20",
+    "replyTimeM": "2015/12/21 09:52:00",
+    "replyTimeVM": "2015/12/21 09:49:35",
+    "reason": "�",
+    "replyDM": "ok",
+    "replyVM": "ok",
+    "replyM": "fuck",
+    "id": 21
+  }

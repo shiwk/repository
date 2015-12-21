@@ -1,5 +1,7 @@
 package controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import models.Excuse;
 import models.Staff;
 import play.data.binding.As;
@@ -13,11 +15,12 @@ import java.util.List;
  * Created by s on 2015/12/20.
  */
 public class Admin extends Controller {
+    static Gson gson=new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     //添加员工
-    public static void addStaff(String userId, String password, String name, int degree, int isMarried, int sex, @As("dd/MM/yyyy")Date birthDate, @As("dd/MM/yyyy")Date entryDate, int remainDays ,int department){
+    public static void addStaff(String userId, String password, String name, int degree, int isMarried, int sex, @As("yyyy/MM/dd")Date birthDate, @As("yyyy/MM/dd")Date entryDate, int remainDays ,int department){
         Staff staff=new Staff(userId,password,name,degree,isMarried,sex,birthDate,entryDate,remainDays,department);
         staff.save();
-        renderJSON(staff);
+        renderJSON(gson.toJson(staff));
     }
     //删除员工
     public static void deleteStaff(Long id){
@@ -31,17 +34,17 @@ public class Admin extends Controller {
     //修改员工信息
     public static void modifyStaff(Long id,String name, int degree, int isMarried, int sex, Date birthDate, Date entryDate, int remainDays ,int department){
         Staff staff=Staff.findById(id);
-        render(staff.modify(name,degree,isMarried,sex,birthDate,entryDate,remainDays,department));
+        render(gson.toJson(staff.modify(name,degree,isMarried,sex,birthDate,entryDate,remainDays,department)));
     }
     //根据部门查询员工
     public static void checkStaffbyDepartment(int department){
         List<Staff> staffs=Staff.find("byDepartment",department).fetch();
-        renderJSON(staffs);
+        renderJSON(gson.toJson(staffs));
     }
     //根据入职时间查询员工
-    public static void checkStaffbyEntryDate( @Required @As("dd/MM/yyyy") Date startDate,@Required @As("dd/MM/yyyy")Date endDate){
+    public static void checkStaffbyEntryDate( @Required @As("yyyy/MM/dd") Date startDate,@Required @As("yyyy/MM/dd")Date endDate){
         List<Staff> staffs=Staff.find( "select s from  Staff s " +
                 "where s.entryDate>=? and s.entryDate<=?",startDate,endDate).fetch();
-        renderJSON(staffs);
+        renderJSON(gson.toJson(staffs));
     }
 }

@@ -1,5 +1,7 @@
 package controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import play.*;
 import play.data.binding.As;
 import play.data.validation.Required;
@@ -15,6 +17,7 @@ public class Application extends    Controller {
     public static void index() {
         render();
     }
+    static Gson gson=new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
 
     public  static void sayHello(String myName){render(myName);}
 
@@ -43,32 +46,32 @@ public class Application extends    Controller {
     //查看个人信息
     public static void checkInfo(Long id){
         Staff staff=Staff.findById(id);
-        renderJSON(staff);
+        renderJSON(gson.toJson(staff));
     }
 
     //写请假条
-    public static void writeLips(long id,@Required int days,@Required @As("dd/MM/yyyy")Date startDate,@Required @As("dd/MM/yyyy") Date endDate, @Required String reason,@Required int excuseType){
+    public static void writeLips(long id,@Required int days,@Required @As("yyyy/MM/dd")Date startDate,@Required @As("yyyy/MM/dd") Date endDate, @Required String reason,@Required int excuseType){
         Staff staff=Staff.findById(id);
         Excuse excuse=new Excuse(staff.userId,days,startDate,endDate,reason,excuseType);
         excuse.save();
-        renderJSON(excuse);
+        renderJSON(gson.toJson(excuse));
     }
     //查看假条
     public static void checkExcuse(Long id){
         Staff staff=Staff.findById(id);
         List<Excuse> excuses=Excuse.find("byUserid",staff.userId).fetch();
-        renderJSON(excuses);
+        renderJSON(gson.toJson(excuses));
     }
     //查看未通过的请假条
     public static  void checkExcuseNoPass(Long id){
         Staff staff=Staff.findById(id);
         List<Excuse> excuses=Excuse.find("byUseridAndState",staff.userId,0).fetch();
-        renderJSON(excuses);
+        renderJSON(gson.toJson(excuses));
     }
     //修改假条
-    public static void modifyExcuse(Long id,@Required int days,@Required @As("dd/MM/yyyy")Date startDate,@Required @As("dd/MM/yyyy") Date endDate, @Required String reason,@Required int excuseType){
+    public static void modifyExcuse(Long id,@Required int days,@Required @As("yyyy/MM/dd")Date startDate,@Required @As("yyyy/MM/dd") Date endDate, @Required String reason,@Required int excuseType){
         Excuse excuse=Excuse.findById(id);
-        renderJSON(excuse.modify(days, startDate, endDate, reason, excuseType));
+        renderJSON(gson.toJson(excuse.modify(days, startDate, endDate, reason, excuseType)));
     }
     //删除请假条
     public static void deleteExcuse(Long id){
@@ -80,13 +83,13 @@ public class Application extends    Controller {
         Staff staff=Staff.findById(id);
         List<Excuse> excuses=Excuse.find( "select e from Excuse e, Staff s " +
                 "where s.userId = e.userId and s.department= ?",staff.department).fetch();
-        renderJSON(excuses);
+        renderJSON(gson.toJson(excuses));
     }
     //查看同部门员工列表
     public static void  staffInDepartment(Long id){
         Staff staff=Staff.findById(id);
         List<Staff> staffs=Staff.find("byDepartment",staff.department).fetch();
-        renderJSON(staffs);
+        renderJSON(gson.toJson(staffs));
     }
 //    public static void modifyInfo(long id, @Required String userid, @Required String name){
 //        Staff staff=Staff.findById(id);
@@ -99,7 +102,7 @@ public class Application extends    Controller {
             Staff staff=Staff.findById(id);
         if(password.equals(passwordConfirm)){
             staff.setPassword(password);
-            renderJSON(staff);
+            renderJSON(gson.toJson(staff));
         }
         else{
 
@@ -109,6 +112,6 @@ public class Application extends    Controller {
     public static void checkExcusebyPerson(Long id){
         Staff staff=Staff.findById(id);
         List<Excuse> excuses=Excuse.find("select e from Excuse e where e.userId=? order by e.startDate",staff.userId).fetch();
-        renderJSON(excuses);
+        renderJSON(gson.toJson(excuses));
     }
 }

@@ -158,4 +158,14 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="" />
   </component>
+  <component name="libraryTable">
+    <library name="json">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/json" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/json" recursive="false" />
+    </library>
+  </component>
 </project>
